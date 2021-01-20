@@ -5,3 +5,5 @@ def index(request):
 
 def products(request):
     return render(request, 'mainapp/products.html')
+
+# Коментарий для создания ветки урока
