@@ -17,7 +17,7 @@
             <div class="list-group">
 
                 {% for menu_name in menu_names %}
-                    <a href="#" class="list-group-item">{{ menu_name }}</a>
+                    <a href="#" class="list-group-item">{{ menu_name.name }}</a>
                 {% endfor %}
 
             </div>
@@ -60,7 +60,7 @@
                     <div class="card h-100">
                         <a href="#">
                             <img class="card-img-top"
-                                 src="{% static card.src %}"
+                                 src="/media/{{ card.image }}"
                                  alt="">
                         </a>
                         <div class="card-body">
@@ -68,7 +68,7 @@
                                 <a href="#">{{ card.name }}</a>
                             </h4>
                             <h5>{{ card.price }}</h5>
-                            <p class="card-text">{{ card.text }}</p>
+                            <p class="card-text">{{ card.short_description }}</p>
                         </div>
                         <div class="card-footer text-center">
                             <button type="button" class="btn btn-outline-success">Отправить в корзину</button>
