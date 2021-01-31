@@ -10,6 +10,7 @@
 {% endblock %}
 
 {% block form %}
+
     <form action="{% url 'auth:register' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-row">
