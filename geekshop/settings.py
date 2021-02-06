@@ -134,3 +134,5 @@ MEDIA_ROOT = (
 )
 
 AUTH_USER_MODEL = 'authapp.User'
+
+LOGIN_URL = '/auth/login/'

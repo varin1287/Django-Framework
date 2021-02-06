@@ -1,8 +1,10 @@
 from django.shortcuts import HttpResponseRedirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 from mainapp.models import Product
 from basketapp.models import Basket
 
+@login_required
 def basket_add(request, product_id=None):
     product = get_object_or_404(Product, id=product_id)
     baskets = Basket.objects.filter(user=request.user, product=product)
