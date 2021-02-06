@@ -1,8 +1,8 @@
 from django.shortcuts import render, HttpResponseRedirect
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.urls import reverse
-from basketapp.models import Basket
 
+from basketapp.models import Basket
 from authapp.forms import UserLoginForm, UserRegisterForm, UserProfileForm
 
 def login(request):
@@ -26,6 +26,7 @@ def register(request):
         form = UserRegisterForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Вы успешно зарегестрировались')
             return HttpResponseRedirect(reverse('auth:login'))
     else:
         form = UserRegisterForm()

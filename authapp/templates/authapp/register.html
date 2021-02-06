@@ -9,6 +9,10 @@
     class="col-lg-7"
 {% endblock %}
 
+{% block errors %}
+    {{ form.errors}}
+{% endblock %}
+
 {% block form %}
 
     <form action="{% url 'auth:register' %}" method="post" enctype="multipart/form-data">
