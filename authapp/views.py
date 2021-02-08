@@ -1,8 +1,9 @@
 from django.shortcuts import render, HttpResponseRedirect
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.urls import reverse
-from basketapp.models import Basket
+from django.contrib.auth.decorators import login_required
 
+from basketapp.models import Basket
 from authapp.forms import UserLoginForm, UserRegisterForm, UserProfileForm
 
 def login(request):
@@ -26,6 +27,7 @@ def register(request):
         form = UserRegisterForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Вы успешно зарегестрировались')
             return HttpResponseRedirect(reverse('auth:login'))
     else:
         form = UserRegisterForm()
@@ -37,6 +39,7 @@ def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('main:index'))
 
+@login_required
 def profile(request):
     if request.method == 'POST':
         form = UserProfileForm(data=request.POST, files=request.FILES, instance=request.user)

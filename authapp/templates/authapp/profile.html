@@ -68,10 +68,16 @@
                 </div>
             </form>
         </div>
-    {% include 'basketapp/basket.html' %}
+        <div class="col-lg-5">
+                {% include 'basketapp/basket.html' %}
+        </div>
+
     </div>
 </div>
 {% endblock %}
 
 {% block footer %} {% endblock %}
 
+{% block basket_scripts %}
+    <script src="{% static 'js/basket.js' %}"></script>
+{% endblock %}

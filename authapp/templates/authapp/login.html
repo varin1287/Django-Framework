@@ -9,6 +9,10 @@
     class="col-lg-5"
 {% endblock %}
 
+{% block errors %}
+    {{ form.non_field_errors}}
+{% endblock %}
+
 {% block form %}
     <form action="{% url 'auth:login' %}" method="post">
         {% csrf_token %}
