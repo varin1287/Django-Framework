@@ -1,16 +1,20 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
+from django.contrib.auth.decorators import user_passes_test
 
 from authapp.models import User
 from adminapp.forms import AdminUserRegisterForm, AdminUserProfileForm
 
+@user_passes_test(lambda u: u.is_superuser, login_url='mainapp:products')
 def index(request):
     return render(request, 'adminapp/index.html')
 
+@user_passes_test(lambda u: u.is_superuser)
 def admins_user_read(request):
     context = {'users': User.objects.all()}
     return render(request, 'adminapp/admins_user_read.html', context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def admins_user_create(request):
     if request.method == 'POST':
         form = AdminUserRegisterForm(request.POST, request.FILES)
@@ -22,6 +26,7 @@ def admins_user_create(request):
     context = {'form': form, }
     return render(request, 'adminapp/admin-users-create.html', context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def admins_user_update(request, id=None):
     user = User.objects.get(id=id)
     if request.method == 'POST':
@@ -36,6 +41,7 @@ def admins_user_update(request, id=None):
                }
     return render(request, 'adminapp/admin_user_update_delete.html', context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def admins_user_delete(request, id):
     user = User.objects.get(id=id)
     user.is_active = False
