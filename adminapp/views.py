@@ -36,3 +36,8 @@ def admins_user_update(request, id=None):
                }
     return render(request, 'adminapp/admin_user_update_delete.html', context)
 
+def admins_user_delete(request, id):
+    user = User.objects.get(id=id)
+    user.is_active = False
+    user.save()
+    return HttpResponseRedirect(reverse('admins:admins_user_read'))
