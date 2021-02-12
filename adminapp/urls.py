@@ -13,6 +13,8 @@ urlpatterns = [
     path('admins-user-delete/<int:id>/', views.admins_user_delete, name='admins_user_delete'),
     path('admins-products-read/', views.admin_products_read, name='admin_products_read'),
     path('admins-products-create/', views.admins_products_create, name='admins_products_create'),
+    path('admins-products-update/<int:id>/', views.admins_products_update, name='admins_products_update'),
+    path('admins-products-delete/<int:id>/', views.admins_products_delete, name='admins_products_delete'),
 ]
 
 

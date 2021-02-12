@@ -33,7 +33,7 @@
                                 <tbody>
                                 {% for product in products %}
                                      <tr>
-                                        <td><a href="{% url 'admins:admins_user_update' user.id %}" style="color: dodgerblue">{{ product.name }}</a></td>
+                                        <td><a href="{% url 'admins:admins_products_update' product.id %}" style="color: dodgerblue">{{ product.name }}</a></td>
                                         <td>{{ product.category }}</td>
                                         <td>{{ product.short_description}}</td>
                                         <td>{{ product.price }}</td>
