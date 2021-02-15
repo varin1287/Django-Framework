@@ -13,10 +13,10 @@
 
         <div class="col-lg-3">
 
-            <h1 class="my-4">GeekShop {{ category_name }} </h1>
+            <h1 class="my-4">GeekShop  </h1>
             <div class="list-group">
 
-                {% for menu_name in menu_names %}
+                {% for menu_name in Pr %}
                     <a href="{% url 'main:product' menu_name.id %}" class="list-group-item">{{ menu_name.name }}</a>
                 {% endfor %}
 

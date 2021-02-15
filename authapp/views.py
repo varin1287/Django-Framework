@@ -3,25 +3,18 @@ from django.contrib import auth, messages
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView, UpdateView
+from django.contrib.auth.views import LoginView
 
 from basketapp.models import Basket
 from authapp.forms import UserLoginForm, UserRegisterForm, UserProfileForm
 from authapp.models import User
 
-def login(request):
-    if request.method == 'POST':
-        form = UserLoginForm(data=request.POST)
-        if form.is_valid():
-            username = request.POST['username']
-            password = request.POST['password']
-            user = auth.authenticate(username=username, password=password)
-            if user and user.is_active:
-                auth.login(request, user)
-                return HttpResponseRedirect(reverse('main:index'))
-    else:
-        form = UserLoginForm()
-    context = {'form': form, 'head': 'авторизация'}
-    return render(request, 'authapp/login.html', context)
+
+
+class UserLoginView(LoginView):
+    template_name = 'authapp/login.html'
+    form_class = UserLoginForm
+
 
 class UserCreateView(CreateView):
     model = User
@@ -37,8 +30,10 @@ class UserProfileView(UpdateView):
     model = User
     template_name = 'authapp/profile.html'
     form_class = UserProfileForm
-    #success_url = reverse_lazy('auth:profile')
-    success_url = reverse_lazy('main:index')
+
+    def get_success_url(self):
+        self.success_url = reverse_lazy('auth:profile', args=[self.kwargs['pk']])
+        return str(self.success_url)
 
 
 
